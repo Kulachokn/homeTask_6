@@ -2,49 +2,51 @@ import React, {Component, createContext} from "react";
 
 // const Context = createContext();
 
-const themeConfig = {
-    // light: {
-    //     headerBg: '#F7B30C',
-    //     fontColor: 'black',
-    //     bodybg: 'white'
-    // },
-    // dark: {
-    //     headerBg: '#3c3c3c',
-    //     fontColor: 'white',
-    //     bodybg: 'black'
-    // }
-    light: {
-        bodyBg: "bgLight",
-        btnBgColor: "formBtnLight"
-    },
-    dark: {
-        bodyBg: "bgDark",
-        btnBgColor: "formBtnDark"
-    }
-};
+// const themeConfig = {
+//     light: {
+//         headerBg: '#F7B30C',
+//         fontColor: 'black',
+//         bodybg: 'white'
+//     },
+//     dark: {
+//         headerBg: '#3c3c3c',
+//         fontColor: 'white',
+//         bodybg: 'black'
+//     }
+// };
 
-const { Provider, Consumer } = createContext({
-    type: 'light',
-    config: themeConfig.light,
-    toggleTheme: () => null,
-});
+// const { Provider, Consumer } = createContext({
+//     type: 'light',
+//     config: themeConfig.light,
+//     toggleTheme: () => null,
+// });
+
+const { Provider, Consumer } = createContext();
 
 export default class ThemeContext extends Component {
     static Consumer = Consumer;
     // static Consumer = Context.Consumer;
 
     toggleTheme = () => {
-        const { type, config } = this.state;
-        const { dark, light } = themeConfig;
         this.setState({
-            type: type === "dark" ? "light" : "dark",
-            config: config === dark ? light : dark
+            type: this.state.type === "dark" ? "light" : "dark"
         });
     };
 
     state = {
-        themeType: "light",
-        theme: themeConfig.light,
+        type: "light",
+        themeConfig: {
+            light: {
+                headerBg: '#F7B30C',
+                fontColor: 'black',
+                bodybg: 'white'
+            },
+            dark: {
+                headerBg: '#3c3c3c',
+                fontColor: 'white',
+                bodybg: 'black'
+            }
+        },
         toggleTheme: this.toggleTheme
     };
 
@@ -82,3 +84,23 @@ export default class ThemeContext extends Component {
 //         theme: themeConfig[themeKind]
 //     });
 // };
+
+// static Consumer = Context.Consumer;
+
+// toggleTheme = () => {
+//     const { type, config } = this.state;
+//     const { dark, light } = themeConfig;
+//     this.setState({
+//         type: type === "dark" ? "light" : "dark",
+//         config: config === dark ? light : dark
+//     });
+// };
+
+// light: {
+//     bodyBg: "bgLight",
+//     btnBgColor: "formBtnLight"
+// },
+// dark: {
+//     bodyBg: "bgDark",
+//     btnBgColor: "formBtnDark"
+// }
