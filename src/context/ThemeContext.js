@@ -1,106 +1,48 @@
-import React, {Component, createContext} from "react";
-
-// const Context = createContext();
-
-// const themeConfig = {
-//     light: {
-//         headerBg: '#F7B30C',
-//         fontColor: 'black',
-//         bodybg: 'white'
-//     },
-//     dark: {
-//         headerBg: '#3c3c3c',
-//         fontColor: 'white',
-//         bodybg: 'black'
-//     }
-// };
-
-// const { Provider, Consumer } = createContext({
-//     type: 'light',
-//     config: themeConfig.light,
-//     toggleTheme: () => null,
-// });
+import React, { Component, createContext } from 'react';
+import PropTypes from 'prop-types';
 
 const { Provider, Consumer } = createContext();
 
 export default class ThemeContext extends Component {
-    static Consumer = Consumer;
-    // static Consumer = Context.Consumer;
+  static Consumer = Consumer;
 
-    toggleTheme = () => {
-        this.setState({
-            type: this.state.type === "dark" ? "light" : "dark"
-        });
-    };
+  static propTypes = {
+    children: PropTypes.element.isRequired,
+  };
 
-    state = {
-        type: "light",
-        themeConfig: {
-            light: {
-                headerBg: '#F7B30C',
-                fontColor: 'black',
-                bodybg: 'white'
-            },
-            dark: {
-                headerBg: '#3c3c3c',
-                fontColor: 'white',
-                bodybg: 'black'
-            }
-        },
-        toggleTheme: this.toggleTheme
-    };
+  // eslint-disable-next-line
+  toggleTheme = () => {
+    this.setState(state => ({
+      type: state.type === 'dark' ? 'light' : 'dark',
+    }));
+  };
 
-    render() {
-        return <Provider value={this.state}>{this.props.children}</Provider>;
-    }
+  /* eslint-disable react/no-unused-state */
+  state = {
+    type: 'light',
+    themeConfig: {
+      light: {
+        headerBg: '#f7b30c',
+        fontColor: 'black',
+        bodybg: 'white',
+      },
+      dark: {
+        headerBg: '#3c3c3c',
+        fontColor: 'white',
+        bodybg: 'black',
+      },
+    },
+    toggleTheme: this.toggleTheme,
+  };
+  /* eslint-enable react/no-unused-state */
+
+  render() {
+    const { children } = this.props;
+    return <Provider value={this.state}>{children}</Provider>;
+  }
 }
 
-
-// const { Provider, Consumer } = createContext({
-//     type: 'light',
-//     config: themeConfig.light,
-//     toggleTheme: () => null,
-// });
-
-// toggleTheme = () => {
-//     this.setState(state => ({
-//         theme: state.theme === 'light' ? 'dark' : 'light',
-//         config: themeConfig === dark ? light : dark
-//     }));
-// };
-//
-// toggleTheme = () => {
-//     const { type, config } = this.state;
-//     const { dark, light } = themeConfig;
-//     this.setState({
-//         type: type === "dark" ? "light" : "dark",
-//         config: config === dark ? light : dark
-//     });
-// };
-// toggleTheme = () => {
-//     const themeKind = this.state.themeType === "dark" ? "light" : "dark";
-//     this.setState({
-//         themeType: themeKind,
-//         theme: themeConfig[themeKind]
-//     });
-// };
-
-// static Consumer = Context.Consumer;
-
-// toggleTheme = () => {
-//     const { type, config } = this.state;
-//     const { dark, light } = themeConfig;
-//     this.setState({
-//         type: type === "dark" ? "light" : "dark",
-//         config: config === dark ? light : dark
-//     });
-// };
-
-// light: {
-//     bodyBg: "bgLight",
-//     btnBgColor: "formBtnLight"
-// },
-// dark: {
-//     bodyBg: "bgDark",
-//     btnBgColor: "formBtnDark"
-// }
+export const themePropType = PropTypes.shape({
+  themeConfig: PropTypes.object.isRequired,
+  type: PropTypes.string.isRequired,
+});
