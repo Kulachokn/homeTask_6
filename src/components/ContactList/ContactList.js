@@ -1,7 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import contactsActions from '../../redux/contacts/contactsActions';
 import ContactListItem from '../ContactListItem/ContactListItem';
 import withTheme from '../hoc/withTreme';
+import { themePropType } from '../../context/ThemeContext';
 
 const ContactList = ({ contacts, onRemoveContact, theme }) => {
   const { themeConfig, type } = theme;
@@ -27,6 +30,28 @@ const ContactList = ({ contacts, onRemoveContact, theme }) => {
   );
 };
 
+const mapStateToProps = state => {
+  const { items, filter } = state.contacts;
+  const normalizedFilter = filter.toLowerCase();
+
+  const visibleContacts = items.filter(contact =>
+    contact.name.toLowerCase().includes(normalizedFilter),
+  );
+
+  return {
+    contacts: visibleContacts,
+  };
+};
+
+const mapDispatchToProps = {
+  onRemoveContact: contactsActions.removeContact,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withTheme(ContactList));
+
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.exact({
@@ -36,10 +61,5 @@ ContactList.propTypes = {
     }).isRequired,
   ).isRequired,
   onRemoveContact: PropTypes.func.isRequired,
-  theme: PropTypes.exact({
-    themeConfig: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
+  theme: themePropType.isRequired,
 };
-
-export default withTheme(ContactList);

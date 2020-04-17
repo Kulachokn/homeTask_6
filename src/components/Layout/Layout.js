@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Layout = ({ children }) => <div className="Layout">{children}</div>;
 
 Layout.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
 };
 
 export default Layout;

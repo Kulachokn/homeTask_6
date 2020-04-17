@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import contactsActions from '../../redux/contacts/contactsActions';
 import styles from './ContactForm.module.css';
 import withTheme from '../hoc/withTreme';
 import { themePropType } from '../../context/ThemeContext';
@@ -70,4 +72,8 @@ class ContactForm extends Component {
   }
 }
 
-export default withTheme(ContactForm);
+const mapDispatchToProps = {
+  onAddContact: contactsActions.addContact,
+};
+
+export default connect(null, mapDispatchToProps)(withTheme(ContactForm));

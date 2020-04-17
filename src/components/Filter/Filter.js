@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import contactsActions from '../../redux/contacts/contactsActions';
 import withTheme from '../hoc/withTreme';
 
 function Filter({ value, onChangeFilter, theme }) {
@@ -21,10 +23,18 @@ function Filter({ value, onChangeFilter, theme }) {
   );
 }
 
+const mapStateToProps = state => ({
+  value: state.contacts.filter,
+});
+
+const mapDispatchToProps = {
+  onChangeFilter: contactsActions.changeFilter,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme(Filter));
+
 Filter.propTypes = {
   value: PropTypes.string.isRequired,
   onChangeFilter: PropTypes.func.isRequired,
   theme: PropTypes.object.isRequired,
 };
-
-export default withTheme(Filter);
