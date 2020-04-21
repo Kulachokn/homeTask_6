@@ -5,6 +5,7 @@ import contactsActions from '../../redux/contacts/contactsActions';
 import ContactListItem from '../ContactListItem/ContactListItem';
 import withTheme from '../hoc/withTreme';
 import { themePropType } from '../../context/ThemeContext';
+import styles from './ContactList.module.css';
 
 const ContactList = ({ contacts, onRemoveContact, theme }) => {
   const { themeConfig, type } = theme;
@@ -14,8 +15,15 @@ const ContactList = ({ contacts, onRemoveContact, theme }) => {
         color: themeConfig[type].fontColor,
         background: themeConfig[type].bodybg,
       }}
+      className={styles.container}
     >
-      <h2>Contacts</h2>
+      <h2
+        style={{
+          color: themeConfig[type].headerBg,
+        }}
+      >
+        Contacts
+      </h2>
       <ul>
         {contacts.map(({ id, name, number }) => (
           <ContactListItem

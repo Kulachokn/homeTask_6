@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import contactsActions from '../../redux/contacts/contactsActions';
 import withTheme from '../hoc/withTreme';
+import styles from './Filter.module.css';
 
 function Filter({ value, onChangeFilter, theme }) {
   const { themeConfig, type } = theme;
@@ -12,6 +13,7 @@ function Filter({ value, onChangeFilter, theme }) {
         color: themeConfig[type].fontColor,
         background: themeConfig[type].bodybg,
       }}
+      className={styles.container}
     >
       <p>Find contacts by name</p>
       <input

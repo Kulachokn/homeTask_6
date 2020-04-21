@@ -22,14 +22,14 @@ export default class ThemeContext extends Component {
     type: 'light',
     themeConfig: {
       light: {
-        headerBg: '#f7b30c',
-        fontColor: 'black',
-        bodybg: 'white',
+        headerBg: '#006957',
+        fontColor: '#1E796A',
+        bodybg: '#ffffff',
       },
       dark: {
-        headerBg: '#3c3c3c',
-        fontColor: 'white',
-        bodybg: 'black',
+        headerBg: '#ffffff',
+        fontColor: '#5ED0BD',
+        bodybg: '#00A287',
       },
     },
     toggleTheme: this.toggleTheme,

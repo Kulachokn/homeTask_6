@@ -4,9 +4,16 @@ import withTheme from '../hoc/withTreme';
 import styles from './ThemeSelector.module.css';
 
 const ThemeSelector = ({ theme }) => {
+  const { themeConfig, type } = theme;
   return (
     <div>
-      <span className="label">{theme.type}</span>
+      <span
+        style={{
+          color: themeConfig[type].headerBg,
+        }}
+      >
+        {theme.type}
+      </span>
       <input
         type="checkbox"
         className={styles.checkbox}

@@ -41,7 +41,13 @@ class ContactForm extends Component {
           background: themeConfig[type].bodybg,
         }}
       >
-        <h2>Phonebook</h2>
+        <h2
+          style={{
+            color: themeConfig[type].headerBg,
+          }}
+        >
+          Phonebook
+        </h2>
         <form className={styles.container} onSubmit={this.handleSubmit}>
           <label className={styles.label}>
             Name
